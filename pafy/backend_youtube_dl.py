@@ -79,7 +79,7 @@ class YtdlPafy(BasePafy):
         if not self._have_basic:
             self._fetch_basic()
 
-        allstreams = [YtdlStream(self, z) for z in self._ydl_info['formats'] if z is not None]
+        allstreams = [YtdlStream(z, self) for z in self._ydl_info['formats']]
         self._streams = [i for i in allstreams if i.mediatype == 'normal']
         self._audiostreams = [i for i in allstreams if i.mediatype == 'audio']
         self._videostreams = [i for i in allstreams if i.mediatype == 'video']
@@ -89,7 +89,7 @@ class YtdlPafy(BasePafy):
 
 
 class YtdlStream(BaseStream):
-    def __init__(self, parent, info={}):
+    def __init__(self, info, parent):
         super(YtdlStream, self).__init__(parent)
         self._itag = info['format_id']
 
@@ -103,13 +103,14 @@ class YtdlStream(BaseStream):
             self._mediatype = 'normal'
 
         self._threed = info.get('format_note') == '3D'
-        self._rawbitrate = info.get('abr', 0) * 1024
+        abr = info.get('abr', 0) or 0
+        self._rawbitrate = abr * 1024
 
         height = info.get('height') or 0
         width = info.get('width') or 0
         self._resolution = str(width) + 'x' + str(height)
         self._dimensions = width, height
-        self._bitrate = str(info.get('abr', 0)) + 'k'
+        self._bitrate = str(abr) + 'k'
         self._quality = self._bitrate if self._mediatype == 'audio' else self._resolution
 
         self._extension = info['ext']
