@@ -79,7 +79,7 @@ class YtdlPafy(BasePafy):
         if not self._have_basic:
             self._fetch_basic()
 
-        allstreams = [YtdlStream(z, self) for z in self._ydl_info['formats']]
+        allstreams = [YtdlStream(self, z) for z in self._ydl_info['formats'] if z is not None]
         self._streams = [i for i in allstreams if i.mediatype == 'normal']
         self._audiostreams = [i for i in allstreams if i.mediatype == 'audio']
         self._videostreams = [i for i in allstreams if i.mediatype == 'video']
@@ -89,7 +89,7 @@ class YtdlPafy(BasePafy):
 
 
 class YtdlStream(BaseStream):
-    def __init__(self, info, parent):
+    def __init__(self, parent, info={}):
         super(YtdlStream, self).__init__(parent)
         self._itag = info['format_id']
 
