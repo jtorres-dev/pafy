@@ -22,7 +22,7 @@ early_py_version = sys.version_info[:2] < (2, 7)
 
 class YtdlPafy(BasePafy):
     def __init__(self, *args, **kwargs):
-        self._ydl_info = None
+        self._ydl_info = {}
         self._ydl_opts = g.def_ydl_opts
         ydl_opts = kwargs.get("ydl_opts")
         if ydl_opts:
