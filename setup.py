@@ -25,8 +25,11 @@ setup(
     download_url="git+https://github.com/jtorres-dev/pafy/tags",
     extras_require={
         'youtube-dl-backend': ["yt-dlp"],
-        },
-    package_data={"": ["LICENSE", "README.rst", "CHANGELOG", "AUTHORS"]},
+    },
+    package_data={
+        "": ["LICENSE", "README.rst", "CHANGELOG", "AUTHORS"],
+        "pafy": ["data/cookies-youtube-com.txt"],
+    },
     include_package_data=True,
     license='LGPLv3',
     classifiers=[

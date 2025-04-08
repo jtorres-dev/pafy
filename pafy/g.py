@@ -21,7 +21,7 @@ urls = {
                 'eurl=https://youtube.googleapis.com/v/%s&sts=%s'),
     'embed': "https://youtube.com/embed/%s"
 }
-api_key = "AIzaSyCIM4EzNqi1in22f4Z3Ru3iYvLaY8tc3bo"
+api_key = "AIzaSyAwt52mwHbZNHq7vv3kwTQ4YXIYMSfndmc"
 user_agent = "pafy " + __version__
 lifespan = 60 * 60 * 5  # 5 hours
 opener = build_opener()
@@ -31,7 +31,7 @@ def_ydl_opts = {
     'quiet': True,
     'prefer_insecure': False,
     'no_warnings': True,
-    'cookiefile': "./cookies-youtube-com.txt",
+    'cookiefile': "data/cookies-youtube-com.txt",
 }
 
 # The following are specific to the internal backend
